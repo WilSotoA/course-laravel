@@ -13,6 +13,7 @@ services:
     volumes:
       - mydata:/bitnami/mariadb
   myapp:
+    container_name: myapp-laravel
     image: docker.io/bitnami/laravel:10
     ports:
       - '8000:8000'

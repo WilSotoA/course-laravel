@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PagesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,15 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-Route::get('contact', function () {
-    return view('contacts');
-})->name('contacts'); 
-Route::get('greetings/{name?}', function ($name = "Guest") {
-    $html = "<h2>HTML Content</h2>";
-    $script = "<script>alert('XSS problem - Cross Site Scripting!')</script>";
-$consoles = ["PlayStation","XboxOne","Wii U"];
-    return view('greeting', compact('name', 'html','script','consoles'));
-})->where('name', "[A-Za-z]+")->name('greetings');
+Route::get('/', [PagesController::class, 'home'])->name('home');
+Route::get('contactme', [PagesController::class, 'contact'])->name('contacts');
+Route::post('contact', [PagesController::class, 'message']);
+Route::get('greetings/{name?}', [PagesController::class, 'greeting'])->where('name', "[A-Za-z]+")->name('greetings');
