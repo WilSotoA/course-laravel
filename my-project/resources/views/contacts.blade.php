@@ -3,7 +3,9 @@
 @section('content')
     <h2>Contacts</h2>
     <h2>Text Me</h2>
-
+    @if (session()->has('info'))
+        <h3>{{ session('info')}}</h3>
+    @endif
     <form action="contact" method="post">
         <label for="nameContact">
             Name
