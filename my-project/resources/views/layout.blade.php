@@ -28,7 +28,8 @@
         <nav>
             <a class="{{ activeMenu('/') }}" href="{{ route('home') }}">Home</a>
             <a class="{{ activeMenu('greetings/*') }}" href="{{ route('greetings', 'Wilmer') }}">Greeting</a>
-            <a class="{{ activeMenu('contactme') }}" href="{{ route('contacts') }}">Contact</a>
+            <a class="{{ activeMenu('messages/create') }}" href="{{ route('messages.create') }}">Contact</a>
+            <a class="{{ activeMenu('messages') }}" href="{{ route('messages.index') }}">Messages</a>
         </nav>
     </header>
     @yield('content')
