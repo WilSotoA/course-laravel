@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Message;
 
 class MessagesController extends Controller
 {
@@ -13,7 +14,8 @@ class MessagesController extends Controller
      */
     public function index()
     {
-        $messages = DB::table('messages')->get();
+        $messages = Message::all();
+
         return view('messages.index', compact('messages'));
     }
 
@@ -30,15 +32,13 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('messages')->insert([
+        Message::create([
             "name" => $request->input('nameContact'),
             "email" => $request->input('emailContact'),
             "message" => $request->input('message'),
-            "created_at" => Carbon::now(),
-            "updated_at" => Carbon::now(),
-
         ]);
-        return redirect()->route('messages.index');
+
+        return redirect()->route('mensajes.index');
     }
 
     /**
@@ -46,7 +46,8 @@ class MessagesController extends Controller
      */
     public function show(string $id)
     {
-        $message = DB::table('messages')->where('id', $id)->first();
+        $message = Message::findOrFail($id);
+
         return view('messages.show', compact('message'));
     }
 
@@ -55,7 +56,8 @@ class MessagesController extends Controller
      */
     public function edit(string $id)
     {
-        $message = DB::table('messages')->where('id', $id)->first();
+        $message = Message::findOrFail($id);
+        
         return view('messages.edit', compact('message'));
     }
 
@@ -64,22 +66,23 @@ class MessagesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        DB::table('messages')->where('id', $id)->update([
+        $message = Message::findOrFail($id);
+        $message->update([
             "name" => $request->input('nameContact'),
             "email" => $request->input('emailContact'),
             "message" => $request->input('message'),
-            "updated_at" => Carbon::now(),
-
         ]);
-    return redirect()->route('messages.index');
+        
+        return redirect()->route('mensajes.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {   
-        DB::table('messages')->where('id', $id)->delete();
-        return redirect()->route('messages.index');
+    {
+        Message::findOrFail($id)->delete();
+
+        return redirect()->route('mensajes.index');
     }
 }
