@@ -21,15 +21,22 @@
 
 <body>
     <header>
-        <?php function activeMenu($url){
-            return request()->is($url)?'active': '';
-        };
+        <?php function activeMenu($url)
+        {
+            return request()->is($url) ? 'active' : '';
+        }
         ?>
         <nav>
             <a class="{{ activeMenu('/') }}" href="{{ route('home') }}">Home</a>
             <a class="{{ activeMenu('greetings/*') }}" href="{{ route('greetings', 'Wilmer') }}">Greeting</a>
-            <a class="{{ activeMenu('messages/create') }}" href="{{ route('mensajes.create') }}">Contact</a>
-            <a class="{{ activeMenu('messages') }}" href="{{ route('mensajes.index') }}">Messages</a>
+            <a class="{{ activeMenu('messages/create') }}" href="{{ route('messages.create') }}">Contact</a>
+            @auth
+                <a class="{{ activeMenu('messages') }}" href="{{ route('messages.index') }}">Messages</a>
+                <a href="/logout">Log Out {{ auth()->user()->name }}</a>
+            @endauth
+            @guest
+                <a class="{{ activeMenu('login') }}" href="/login">Log In</a>
+            @endguest
         </nav>
     </header>
     @yield('content')

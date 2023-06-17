@@ -6,8 +6,8 @@
     @if (session()->has('info'))
         <h3>{{ session('info')}}</h3>
     @endif
-    <form action="{{ route('mensajes.store') }}" method="post">
-        {!! csrf_field() !!}
+    <form action="{{ route('messages.store') }}" method="post">
+        @csrf
         <label for="nameContact">
             Name
             <input type="text" name="nameContact" value="{{ old('nameContact') }}">

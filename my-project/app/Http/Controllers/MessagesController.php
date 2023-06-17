@@ -9,6 +9,11 @@ use App\Models\Message;
 
 class MessagesController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth', ['except' => ['create', 'store']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -38,7 +43,7 @@ class MessagesController extends Controller
             "message" => $request->input('message'),
         ]);
 
-        return redirect()->route('mensajes.index');
+        return redirect()->route('messages.create')->with('info', 'we have received your message');
     }
 
     /**
@@ -73,7 +78,7 @@ class MessagesController extends Controller
             "message" => $request->input('message'),
         ]);
         
-        return redirect()->route('mensajes.index');
+        return redirect()->route('messages.index');
     }
 
     /**
@@ -83,6 +88,6 @@ class MessagesController extends Controller
     {
         Message::findOrFail($id)->delete();
 
-        return redirect()->route('mensajes.index');
+        return redirect()->route('messages.index');
     }
 }

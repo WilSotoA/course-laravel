@@ -16,16 +16,6 @@ class PagesController extends Controller
     {
         return view('home');
     }
-    public function contact()
-    {
-        return view('contacts');
-    }
-    public function message(CreateMessageRequest $request)
-    {
-        $data = $request->all();
-        return back()
-        ->with('info', 'your message has been sent successfully :)');
-    }
     public function greeting($name = "Guest")
     {
         $html = "<h2>HTML Content</h2>";
