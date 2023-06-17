@@ -7,19 +7,19 @@
         @method('PUT')
         <label for="nameContact">
             Name
-            <input type="text" name="nameContact" value="{{ $message->name }}">
+            <input class="form-control" type="text" name="nameContact" value="{{ $message->name }}">
             {!! $errors->first('nameContact', '<span class="error">:message</span>') !!}
         </label>
         <label for="emailContact">
             Email
-            <input type="email" name="emailContact" value="{{ $message->email }}">
+            <input class="form-control" type="email" name="emailContact" value="{{ $message->email }}">
             {!! $errors->first('emailContact', '<span class="error">:message</span>') !!}
         </label>
         <label for="message">
             Message
-            <textarea name="message">{{ $message->message }}</textarea>
+            <textarea class="form-control" name="message">{{ $message->message }}</textarea>
             {!! $errors->first('message', '<span class="error">:message</span>') !!}
         </label>
-        <input type="submit" value="send">
+        <input class="btn btn-primary" type="submit" value="send">
     </form>
 @endsection

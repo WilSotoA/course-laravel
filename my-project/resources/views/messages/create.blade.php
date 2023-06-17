@@ -10,19 +10,19 @@
         @csrf
         <label for="nameContact">
             Name
-            <input type="text" name="nameContact" value="{{ old('nameContact') }}">
+            <input class="form-control" type="text" name="nameContact" value="{{ old('nameContact') }}">
             {!! $errors->first('nameContact','<span class="error">:message</span>') !!}
         </label>
         <label for="emailContact">
             Email
-            <input type="email" name="emailContact" value="{{ old('emailContact') }}"> 
+            <input class="form-control" type="email" name="emailContact" value="{{ old('emailContact') }}"> 
             {!! $errors->first('emailContact','<span class="error">:message</span>') !!}
         </label> 
         <label for="message">
             Message
-            <textarea name="message">{{ old('message') }}</textarea>
+            <textarea class="form-control" name="message">{{ old('message') }}</textarea>
             {!! $errors->first('message','<span class="error">:message</span>') !!}
         </label>
-        <input type="submit" value="send">
+        <input class="btn btn-primary" type="submit" value="send">
     </form>
 @endsection

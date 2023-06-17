@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>All messages</h1>
-    <table width="100%" border="1px solid">
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -24,11 +24,11 @@
                     <td>{{ $message->email }}</td>
                     <td>{{ $message->message }}</td>
                     <td>
-                        <a href="{{ route('messages.edit',$message->id) }}">Edit</a>
+                        <a class="btn btn-info btn-xs" href="{{ route('messages.edit',$message->id) }}">Edit</a>
                         <form style="display:inline" method="POST" action="{{ route('messages.destroy',$message->id) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Delete</button>
+                            <button class="btn btn-danger btn-xs" type="submit">Delete</button>
                         </form>
                     </td>
                 </tr>
