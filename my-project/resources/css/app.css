@@ -3,11 +3,9 @@
     padding: 0;
     box-sizing: border-box
 }
-
 :root {
     --green: rgb(0, 84, 0)
 }
-
 .active {
     text-decoration: none;
     color: var(--green)
