@@ -8,7 +8,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}"> --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    @vite(['resources/css/app.css']) {{--compilar css--}}
+    @vite(['resources/css/app.css']) {{-- compilar css --}}
     <title>Mi sitio</title>
 </head>
 
@@ -27,12 +27,20 @@
             <a class="{{ activeMenu('greetings/*') }}" href="{{ route('greetings', 'Wilmer') }}">Greeting</a>
             <a class="{{ activeMenu('messages/create') }}" href="{{ route('messages.create') }}">Contact</a>
             @auth
+                @if (auth()->user()->hasRoles(['admin']))
+                    
+                    <a class="{{ activeMenu('users') }}" href="{{ route('users.index') }}">Users</a>
+                @endif
                 <a class="{{ activeMenu('messages') }}" href="{{ route('messages.index') }}">Messages</a>
                 <a class="nav-link" href="/logout">Log Out {{ auth()->user()->name }}</a>
-            @endauth
+                <a class="nav-link" href="/users/{{ auth()->id() }}/edit">My Account</a>
+
+                @endauth
         </nav>
     </header>
     @yield('content')
-    <footer class="d-flex justify-content-center align-items-center bg-dark text-white">Copyright W {{ date('Y-m-d') }}</footer>
+    <footer class="d-flex justify-content-center align-items-center bg-dark text-white">Copyright W {{ date('Y-m-d') }}
+    </footer>
 </body>
+
 </html>
